@@ -13,3 +13,6 @@ name = "mergesort"
 
 [[example]]
 name = "two_sum"
+
+[[example]]
+name = "add_two_numbers"
