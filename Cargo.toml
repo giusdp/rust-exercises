@@ -16,3 +16,6 @@ name = "two_sum"
 
 [[example]]
 name = "add_two_numbers"
+
+[[example]]
+name = "length_of_longest_substring"
