@@ -19,3 +19,6 @@ name = "add_two_numbers"
 
 [[example]]
 name = "length_of_longest_substring"
+
+[[example]]
+name = "median_sorted_arrays"
