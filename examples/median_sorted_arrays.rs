@@ -41,8 +41,8 @@ Constraints:
 */
 
 fn main() {
-    let nums1 = vec![1, 2, 5];
-    let nums2 = vec![3, 4];
+    let nums1 = vec![1,2];
+    let nums2 = vec![3,4];
     let sol = Solution::find_median_sorted_arrays(nums1, nums2);
     let expected = 2.5;
 
@@ -65,13 +65,14 @@ impl Solution {
 
         let mut nums1 = nums1;
         let mut nums2 = nums2;
-        let sol = Solution::fill(&mut nums1, &mut nums2, vec![], 0, length);
+
+        let merged = Solution::fill(&mut nums1, &mut nums2, vec![], 0, length);
 
         let m = length / 2;
         if length % 2 == 0 {
-            ((sol[(m - 1) as usize] + sol[m as usize]) as f64) / 2.0
+            ((merged[(m - 1) as usize] + merged[m as usize]) as f64) / 2.0
         } else {
-            sol[m as usize] as f64
+            merged[m as usize] as f64
         }
     }
 
@@ -82,23 +83,21 @@ impl Solution {
         l: i32,
         h: i32,
     ) -> Vec<i32> {
-        // println!("{} {} {}", l, h, (h + l) / 2);
-        if h - l < 2 {
-            // println!("Caso base: {} {}", l, h);
-
-            if nums1.len() > 0 && nums2.len() > 0 {
-                if nums1[0] > nums2[0] {
-                    sol.push(nums1.swap_remove(0));
-                } else {
-                    sol.push(nums2.swap_remove(0));
-                }
-            } else if nums1.len() > 0 {
-                sol.push(nums1.swap_remove(0));
-            } else if nums2.len() > 0 {
-                sol.push(nums2.swap_remove(0));
-            }
-
+        if nums1.is_empty() {
+            sol.append(nums2);
+            nums2.clear();
             return sol;
+        } else if nums2.is_empty() {
+            sol.append(nums1);
+            nums1.clear();
+            return sol;
+        }
+        if h - l < 2 {
+            if nums1[0] < nums2[0] {
+                sol.push(nums1.remove(0)); // <- remove is slow, can be improved
+            } else {
+                sol.push(nums2.remove(0)); // <- can be improved
+            }
         }
         let m = (h + l) / 2;
 
