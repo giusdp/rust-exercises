@@ -22,3 +22,9 @@ name = "length_of_longest_substring"
 
 [[example]]
 name = "median_sorted_arrays"
+
+[[example]]
+name = "longest_palindrome"
+
+[[example]]
+name = "zigzag_conversion"
